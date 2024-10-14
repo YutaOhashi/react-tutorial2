@@ -35,7 +35,7 @@ export default function App() {
 
         if (unitSystem === "uk") {
             newTemperature = Math.round((newTemperature - 32) * (5 / 9));
-            newWeight = Math.round(newWeight * 0.453592); 
+            newWeight = Math.round(newWeight / 14); 
         }
 
         setTemperature(newTemperature);
@@ -49,7 +49,7 @@ export default function App() {
                 <label htmlFor="customname">Enter custom name:</label>
                 <input
                     type="text"
-                    placeholder="Enter your name"
+                    placeholder=""
                     onChange={(event) => setName(event.target.value || "Bob")}
                 />
             </div>
@@ -72,7 +72,7 @@ export default function App() {
             <div>
                 <button onClick={generateStory}>Generate random story</button>
             </div>
-            {showStory && 
+            {showStory && (
                 <p>
                     It was {temperature} degrees outside, 
                     so {xItem} went for a walk. 
@@ -82,7 +82,7 @@ export default function App() {
                     but was not surprised — {xItem} weighs {weight} pounds, 
                     and it was a hot day.
                 </p>
-            }
+            )}
         </>
     );
 }
