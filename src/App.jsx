@@ -7,7 +7,8 @@ function randomValueFromArray(array) {
 
 export default function App() {
     const [showStory, setShowStory] = useState(false);
-    const [name, setName] = useState('Bob');
+    const [inputName, setInputName] = useState('Bob');  
+    const [name, setName] = useState('Bob');            
     const [unitSystem, setUnitSystem] = useState('us');
     const [temperature, setTemperature] = useState(94);
     const [weight, setWeight] = useState(300);
@@ -21,25 +22,26 @@ export default function App() {
 
     function generateStory(event) {
         event.preventDefault();
-        
+
         const newXItem = randomValueFromArray(xItems);
         const newYItem = randomValueFromArray(yItems);
         const newZItem = randomValueFromArray(zItems);
-        
+
         setXItem(newXItem);
         setYItem(newYItem);
         setZItem(newZItem);
 
         let newTemperature = 94;
-        let newWeight = 300; 
+        let newWeight = 300;
 
         if (unitSystem === "uk") {
             newTemperature = Math.round((newTemperature - 32) * (5 / 9));
-            newWeight = Math.round(newWeight / 14); 
+            newWeight = Math.round(newWeight / 14);
         }
 
         setTemperature(newTemperature);
         setWeight(newWeight);
+        setName(inputName); 
         setShowStory(true);
     }
 
@@ -50,7 +52,7 @@ export default function App() {
                 <input
                     type="text"
                     placeholder=""
-                    onChange={(event) => setName(event.target.value || "Bob")}
+                    onChange={(event) => setInputName(event.target.value || "Bob")} 
                 />
             </div>
             <div>
