@@ -12,6 +12,8 @@ export default function App() {
     const [unitSystem, setUnitSystem] = useState('us');
     const [temperature, setTemperature] = useState(94);
     const [weight, setWeight] = useState(300);
+    const [unittemperature, setUnitTemperature] = useState('fahrenheit');
+    const [unitweight, setUnitWeight] = useState('pounds');
     const [xItem, setXItem] = useState('');
     const [yItem, setYItem] = useState('');
     const [zItem, setZItem] = useState('');
@@ -32,15 +34,21 @@ export default function App() {
         setZItem(newZItem);
 
         let newTemperature = 94;
+        let newUnitTemperature = 'fahrenheit';
         let newWeight = 300;
+        let newUnitWeight = 'pounds';
 
         if (unitSystem === "uk") {
             newTemperature = Math.round((newTemperature - 32) * (5 / 9));
+            newUnitTemperature = 'centigrade';
             newWeight = Math.round(newWeight / 14);
+            newUnitWeight = 'stone';
         }
 
         setTemperature(newTemperature);
+        setUnitTemperature(newUnitTemperature);
         setWeight(newWeight);
+        setUnitWeight(newUnitWeight);
         setName(inputName); 
         setShowStory(true);
     }
@@ -76,12 +84,12 @@ export default function App() {
             </div>
             {showStory && (
                 <p>
-                    It was {temperature} degrees outside, 
+                    It was {temperature} {unittemperature} outside, 
                     so {xItem} went for a walk. 
                     When they got to {yItem}, 
                     they stared in horror for a few moments, 
                     then {zItem}. {name} saw the whole thing, 
-                    but was not surprised — {xItem} weighs {weight} pounds, 
+                    but was not surprised — {xItem} weighs {weight} {unitweight}, 
                     and it was a hot day.
                 </p>
             )}
