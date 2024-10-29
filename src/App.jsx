@@ -37,7 +37,8 @@ export default function App() {
             unitWeight = 'stone';
         }
 
-        const generatedStory = `It was ${finalTemperature} ${unitTemperature} outside, 
+        const generatedStory = 
+        `It was ${finalTemperature} ${unitTemperature} outside, 
         so ${newXItem} went for a walk. 
         When they got to ${newYItem}, 
         they stared in horror for a few moments, 
