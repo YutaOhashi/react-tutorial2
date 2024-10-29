@@ -6,17 +6,9 @@ function randomValueFromArray(array) {
 }
 
 export default function App() {
-    const [showStory, setShowStory] = useState(false);
-    const [inputName, setInputName] = useState('Bob');  
-    const [name, setName] = useState('Bob');            
+    const [name, setName] = useState('Bob');
     const [unitSystem, setUnitSystem] = useState('us');
-    const [temperature, setTemperature] = useState(94);
-    const [weight, setWeight] = useState(300);
-    const [unittemperature, setUnitTemperature] = useState('fahrenheit');
-    const [unitweight, setUnitWeight] = useState('pounds');
-    const [xItem, setXItem] = useState('');
-    const [yItem, setYItem] = useState('');
-    const [zItem, setZItem] = useState('');
+    const [story, setStory] = useState('');
 
     const xItems = ['Willy the Goblin', 'Big Daddy', 'Father Christmas'];
     const yItems = ['the soup kitchen', 'Disneyland', 'the White House'];
@@ -29,28 +21,31 @@ export default function App() {
         const newYItem = randomValueFromArray(yItems);
         const newZItem = randomValueFromArray(zItems);
 
-        setXItem(newXItem);
-        setYItem(newYItem);
-        setZItem(newZItem);
+        const inputName = document.getElementById("customname").value || "Bob";
+        const temperature = 94;
+        const weight = 300;
+        let unitTemperature = 'fahrenheit';
+        let unitWeight = 'pounds';
 
-        let newTemperature = 94;
-        let newUnitTemperature = 'fahrenheit';
-        let newWeight = 300;
-        let newUnitWeight = 'pounds';
+        let finalTemperature = temperature;
+        let finalWeight = weight;
 
         if (unitSystem === "uk") {
-            newTemperature = Math.round((newTemperature - 32) * (5 / 9));
-            newUnitTemperature = 'centigrade';
-            newWeight = Math.round(newWeight / 14);
-            newUnitWeight = 'stone';
+            finalTemperature = Math.round((temperature - 32) * (5 / 9));
+            unitTemperature = 'centigrade';
+            finalWeight = Math.round(weight / 14);
+            unitWeight = 'stone';
         }
 
-        setTemperature(newTemperature);
-        setUnitTemperature(newUnitTemperature);
-        setWeight(newWeight);
-        setUnitWeight(newUnitWeight);
-        setName(inputName); 
-        setShowStory(true);
+        const generatedStory = `It was ${finalTemperature} ${unitTemperature} outside, 
+        so ${newXItem} went for a walk. 
+        When they got to ${newYItem}, 
+        they stared in horror for a few moments, 
+        then ${newZItem}. ${inputName} saw the whole thing, 
+        but was not surprised — ${newXItem} weighs ${finalWeight} ${unitWeight}, 
+        and it was a hot day.`;
+
+        setStory(generatedStory);
     }
 
     return (
@@ -59,8 +54,9 @@ export default function App() {
                 <label htmlFor="customname">Enter custom name:</label>
                 <input
                     type="text"
+                    id="customname"
                     placeholder=""
-                    onChange={(event) => setInputName(event.target.value || "Bob")} 
+                    onChange={(event) => setName(event.target.value || "Bob")} 
                 />
             </div>
             <div>
@@ -82,16 +78,8 @@ export default function App() {
             <div>
                 <button onClick={generateStory}>Generate random story</button>
             </div>
-            {showStory && (
-                <p>
-                    It was {temperature} {unittemperature} outside, 
-                    so {xItem} went for a walk. 
-                    When they got to {yItem}, 
-                    they stared in horror for a few moments, 
-                    then {zItem}. {name} saw the whole thing, 
-                    but was not surprised — {xItem} weighs {weight} {unitweight}, 
-                    and it was a hot day.
-                </p>
+            {story && (
+                <p>{story}</p>
             )}
         </>
     );
