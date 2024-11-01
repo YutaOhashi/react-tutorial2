@@ -8,14 +8,13 @@ function randomValueFromArray(array) {
 export default function App() {
     const [name, setName] = useState('Bob');
     const [unitSystem, setUnitSystem] = useState('us');
-    const [story, setStory] = useState('');
-
-    const xItems = ['Willy the Goblin', 'Big Daddy', 'Father Christmas'];
-    const yItems = ['the soup kitchen', 'Disneyland', 'the White House'];
-    const zItems = ['spontaneously combusted', 'melted into a puddle on the sidewalk', 'turned into a slug and crawled away'];
 
     function generateStory(event) {
         event.preventDefault();
+
+        const xItems = ['Willy the Goblin', 'Big Daddy', 'Father Christmas'];
+        const yItems = ['the soup kitchen', 'Disneyland', 'the White House'];
+        const zItems = ['spontaneously combusted', 'melted into a puddle on the sidewalk', 'turned into a slug and crawled away'];
 
         const newXItem = randomValueFromArray(xItems);
         const newYItem = randomValueFromArray(yItems);
@@ -38,15 +37,11 @@ export default function App() {
         }
 
         const generatedStory = 
-        `It was ${finalTemperature} ${unitTemperature} outside, 
-        so ${newXItem} went for a walk. 
-        When they got to ${newYItem}, 
-        they stared in horror for a few moments, 
-        then ${newZItem}. ${inputName} saw the whole thing, 
-        but was not surprised — ${newXItem} weighs ${finalWeight} ${unitWeight}, 
-        and it was a hot day.`;
+        `It was ${finalTemperature} ${unitTemperature} outside, so ${newXItem} went for a walk. When they got to ${newYItem}, they stared in horror for a few moments, then ${newZItem}. ${inputName} saw the whole thing, but was not surprised — ${newXItem} weighs ${finalWeight} ${unitWeight}, and it was a hot day.`;
 
-        setStory(generatedStory);
+        const storyOutput = document.getElementById("storyOutput");
+        storyOutput.innerText = generatedStory;
+        storyOutput.style.display = "block"; 
     }
 
     return (
@@ -79,9 +74,9 @@ export default function App() {
             <div>
                 <button onClick={generateStory}>Generate random story</button>
             </div>
-            {story && (
-                <p>{story}</p>
-            )}
+            <div>
+                <p id="storyOutput" style={{ whiteSpace: 'pre-wrap', marginTop: '20px', border: '1px solid #ccc', padding: '10px', display: 'none' }}></p>
+            </div>
         </>
     );
 }
